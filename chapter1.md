@@ -40,3 +40,16 @@ This is an example exercise.
 ```{r}
 
 ```
+
+---
+
+## Parallel Processing for Larger Datasets
+
+```yaml
+type: VideoExercise
+key: ceae36edcb
+xp: 50
+```
+
+`@projector_key`
+25e3bda2b8a26bbfb2f6c8fdafeb3eca
