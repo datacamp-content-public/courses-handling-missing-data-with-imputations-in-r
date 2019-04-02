@@ -139,14 +139,14 @@ Degree of missingness, number of dimensions (variables), type of imputation empl
 ```yaml
 type: "TwoRows"
 key: "1832f63d1a"
-code_zoom: 65
+code_zoom: 70
 ```
 
 `@part1`
-> Using 10% of the data...
-
-- m = 6 (# of imputed datasets)
-- maxit = 10 (# of iterations per set)
+> Using a random **10%** of the data...
+- m = 6 _(# of imputed datasets)_
+- maxit = 10 _(# of iterations per set)_
+- runtime is **~ 1 minute**
 
 
 `@part2`
@@ -167,11 +167,97 @@ runtime # Time difference of 1.012093 mins
 `@script`
 Before imputing a larger dataset, it would be wise to get a feel for how long your imputing might take you. It might take you a few minutes, or much longer.
 
-A simple step for getting a rough back-of-the-envelope runtime estimate would be to run your impuation on a random sample of your data, and calculate the time it takes using the Sys.time() function.
+A simple step for getting a rough runtime estimate would be to run your imputation on a random sample of your data, and calculate the time it takes using the Sys.time() function. You may want to use the sample_n() function from the well known dplyr package sample your data.
 
-In this example, suppose you have decided to create 6 imputed datasets, with 10 iterations. Within the mice() function, call a sample dataset, and specify m = 6, maxit = 10. 
+In this example, suppose you have decided to create 6 imputed datasets, with 10 iterations each. Within the mice() function, call your sample dataset, and specify m = 6, and maxit = 10. 
 
-Running this imputation job on 10% of the data takes around 1 minute. Right about now, you might be thinking that it would take about 10 minutes to run your imputation job...
+Running this imputation job on my machine using 10% of the data takes around 1 minute. Right about now, you might be thinking that it would take about 10 minutes to run the imputation job...
+
+
+---
+## Estimating Imputation Runtime
+
+```yaml
+type: "TwoRows"
+key: "2c56bfa2a8"
+```
+
+`@part1`
+> Using a random **30%** of the data...
+- m = 6 (# of imputed datasets)
+- maxit = 10 (# of iterations per set)
+- runtime is **~ 4 minutes**
+
+
+`@part2`
+- **Runtime is not always linear**... it can follow an exponential curve, a 2nd order polynomial, or some other complex function. 
+
+- Utilizing a technique known as **'parallel processing'** can help you approach computationally expensive jobs more efficiently.
+
+
+`@script`
+...but running 30% of the data is around 4 minutes of runtime. So your full imputation task could be considerably longer. Algorithm runtime is generally not a linear function. Utilizing a technique known as 'parallel processing' can make your imputing a LOT more efficient.
+
+
+---
+## Determine Number of Cores
+
+```yaml
+type: "FullSlide"
+key: "e6ca92e44f"
+```
+
+`@part1`
+First, call the 'parallel' package, and use detectCores() to determine the number of CPUs available:
+
+```{r}
+library(parallel)
+
+# print number of available cores
+detectCores()
+```
+
+
+`@script`
+Fortunately, in order to make your imputation job a bit more efficient, you may want to utilize parallel processing, using multiple cores (also known as CPUs) available within your local machine. Again, the impact of this may vary by machine. 
+
+A simple function from the 'parallel' package known as 'detectCores()' will allow you to determine how many cores you have at your disposal. In this example, we have 4 cores to work with.
+
+
+---
+## Using parlmice()
+
+```yaml
+type: "TwoRows"
+key: "1c05ef1df9"
+code_zoom: 65
+```
+
+`@part1`
+
+
+
+`@part2`
+```{r}
+# log the start time before imputing
+start <- Sys.time()
+shuttle_imp_parl <- parlmice(shuttle_sample, m = 6,
+                              n.core = 3, 
+                              n.imp.core = 2,
+                              maxit = 10)
+# log completion time 
+end <- Sys.time()
+
+# calculate total runtime
+parl_time <- end - start
+parl_time #
+```
+
+
+`@script`
+In order to leverage this additional computing power, the MICE package has a great wrapper function named "parlMice" which enables you to divide the work across multiple cores in parallel. It is considered best practice to use n-1 for the number of cores, since your local machine still needs CPU power to run its other processes. You run the risk of jamming your machine up if you exhaust all available power.  
+
+Running the previous sample of 30% will only take 33 seconds which is a marked improvement over 1.54 minutes. FYI it takes 5 minutes to do the entire imputation job with 3 cores.
 
 
 ---
