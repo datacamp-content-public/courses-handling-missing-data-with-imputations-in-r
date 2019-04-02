@@ -134,6 +134,47 @@ Degree of missingness, number of dimensions (variables), type of imputation empl
 
 
 ---
+## Estimating Imputation Runtime
+
+```yaml
+type: "TwoRows"
+key: "1832f63d1a"
+code_zoom: 65
+```
+
+`@part1`
+> Using 10% of the data...
+
+- m = 6 (# of imputed datasets)
+- maxit = 10 (# of iterations per set)
+
+
+`@part2`
+```{r}
+#take a random sample of 10%
+shuttle_sample <- sample_n(shuttle, 
+					0.10 * nrow(shuttle))
+# calculate runtime
+start <- Sys.time()
+shuttle_imp <- mice(shuttle_sample,
+					m = 6, maxit = 10)
+end <- Sys.time()
+runtime <- end-start
+runtime # Time difference of 1.012093 mins
+```
+
+
+`@script`
+Before imputing a larger dataset, it would be wise to get a feel for how long your imputing might take you. It might take you a few minutes, or much longer.
+
+A simple step for getting a rough back-of-the-envelope runtime estimate would be to run your impuation on a random sample of your data, and calculate the time it takes using the Sys.time() function.
+
+In this example, suppose you have decided to create 6 imputed datasets, with 10 iterations. Within the mice() function, call a sample dataset, and specify m = 6, maxit = 10. 
+
+Running this imputation job on 10% of the data takes around 1 minute. Right about now, you might be thinking that it would take about 10 minutes to run your imputation job...
+
+
+---
 ## Let's practice!
 
 ```yaml
