@@ -208,6 +208,8 @@ key: "e6ca92e44f"
 ```
 
 `@part1`
+Parallel processing leverages multiple CPUs simultaneously
+
 First, call the 'parallel' package, and use detectCores() to determine the number of CPUs available:
 
 ```{r}
@@ -215,13 +217,15 @@ library(parallel)
 
 # print number of available cores
 detectCores()
+
+[1] 4
 ```
 
 
 `@script`
-Fortunately, in order to make your imputation job a bit more efficient, you may want to utilize parallel processing, using multiple cores (also known as CPUs) available within your local machine. Again, the impact of this may vary by machine. 
+Parallel processing allows you to use multiple cores, or CPUs, within your local machine. Again, the availability and performance will vary by machine - but the concept is still the same. 
 
-A simple function from the 'parallel' package known as 'detectCores()' will allow you to determine how many cores you have at your disposal. In this example, we have 4 cores to work with.
+To get started, first use a function called 'detectCores()' from the 'parallel' package. This will allow you to determine how many cores you have at your disposal. In this example, we have 4 cores to work with.
 
 
 ---
