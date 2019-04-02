@@ -1,5 +1,7 @@
-title: Handling Missing Data with Imputations in R
-description: Course description goes here.
+title: Handling Missing Data with Imputations in R - Tim Flocke
+description: >-
+  This course covers to use multiple imputation techniques to handle missing
+  data, with a specific focus on the MICE package (multiple imputation with
+  chained equations).
 programming_language: r
-from: "r-base-prod:v1.0.2"
-#from: "tidyverse-base-prod:v1.0.2"
+from: 'r-base-prod:v1.0.2'
