@@ -29,7 +29,7 @@ key: "c191cb6216"
 ```
 
 `@part1`
-
+Intro
 
 
 `@script`
@@ -106,6 +106,31 @@ paste("Total sparsity is:", sum(sparsity$sparsity))
 
 `@script`
 Here we can examine each variable's percentage of missing data. As shown previously, a simple check of sparsity can be run using the colSums() and is.na() functions from base R. This shows that we have about 30% total sparsity, and the 'missingness' is spread across all variables
+
+
+---
+## Estimating Imputation Runtime
+
+```yaml
+type: "FullSlide"
+key: "717f85ef98"
+```
+
+`@part1`
+> Runtime needed depends on:
+
+1. Individual machine,
+2. Degree of 'missingness', 
+3. Number of dimensions (variables)
+4. Type of imputation employed for each variable, 
+5. Number of iterations, and 
+6. Number of imputed datasets specified
+
+
+`@script`
+While the Shuttle data is only moderately sized, the computation time needed to impute the missing data can be time consuming, depending on the type of local machine you are working on and available computing power. If this dataset were ten times larger, at 580,000 observations, this complexity would be compounded. The runtime needed not only varies by machine, but also by
+
+Degree of missingness, number of dimensions (variables), type of imputation employed for each variable, number of iterations, and the number of imputed datasets that you specify.
 
 
 ---
