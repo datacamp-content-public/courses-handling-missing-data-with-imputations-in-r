@@ -74,7 +74,38 @@ https://archive.ics.uci.edu/ml/datasets/Statlog+(Shuttle)
 
 
 `@script`
-he example dataset is a rather well known machine learning dataset provided by NASA, and is taken from the "mlbench" package. It represents 9 independent variables of numeric data type, and 1 categorical dependent variable. The data features 58,000 observations, and is not in the realm of what most would consider "big data", but is ideal for demonstrating less than instantaneous computation of imputations.
+The example dataset is a rather well known machine learning dataset provided by NASA, and is taken from the "mlbench" package. It represents 9 independent variables of numeric data type, and 1 categorical dependent variable. The data features 58,000 observations, and is not in the realm of what most would consider "big data", but is ideal for demonstrating less than instantaneous imputation runtime.
+
+
+---
+## Examining Sparsity
+
+```yaml
+type: "TwoRows"
+key: "cbf1e26ddf"
+code_zoom: 70
+```
+
+`@part1`
+- Using the colSums() and is.na() functions from base R 
+- Sparsity relatively even across variables
+- The total sparsity is ~30% of the data
+
+
+`@part2`
+```{r}
+# examine sparsity
+sparsity <- data.frame(
+                sparsity = colSums(is.na(shuttle))/nrow(shuttle)
+                )
+t(sparsity) #transpose
+paste("Total sparsity is:", sum(sparsity$sparsity))
+```
+![](https://assets.datacamp.com/production/repositories/4850/datasets/cd044c4de2d7aa93d04c8bdc11fde7c841834d10/sparsity.PNG)
+
+
+`@script`
+Here we can examine each variable's percentage of missing data. As shown previously, a simple check of sparsity can be run using the colSums() and is.na() functions from base R. This shows that we have about 30% total sparsity, and the 'missingness' is spread across all variables
 
 
 ---
