@@ -35,9 +35,9 @@ hide_title: false
 > Data Summary:
 
 - 'mlbench' package
+- 58,000 observations
 - 9 numeric ind variables
 - 1 categorical dep variable
-- 58,000 observations
 
 
 `@part2`
@@ -90,7 +90,7 @@ paste("Total sparsity is:", sum(sparsity$sparsity))
 
 
 `@script`
-Now briefly review each variable's percentage of missing data. As shown previously, a simple check of sparsity can be run using the colSums() and is.na() functions from base R. This shows that we have about 30% total sparsity, and the 'missingness' is spread across all variables
+Now, briefly review each variable's percentage of missing data. As shown previously, a simple check of sparsity can be run using the colSums() and is.na() functions from base R. This shows that we have about 30% total sparsity, and the 'missingness' is spread across all variables.
 
 
 ---
@@ -113,9 +113,7 @@ key: "717f85ef98"
 
 
 `@script`
-While this data is only moderately sized, the time needed to impute the missing data can be considerable, depending on the type of local machine you are working on and available computing power. If this dataset were ten times larger, at 580,000 observations, the complexity would be compounded. The runtime needed not only varies by individual machine, but also by:
-
-Degree of missingness, number of dimensions, type of imputation employed for each variable, number of iterations, and the number of imputed datasets that you specify.
+While this data is only moderately sized, the time needed to impute the missing data can be considerable, depending on the type of local machine you are working on and available computing power. If this dataset were ten times larger, at 580,000 observations, the complexity would be compounded. The required runtime not only varies by individual machine, but also by degree of 'missingness', number of dimensions, type of imputation employed for each variable, number of iterations, and the number of imputed datasets.
 
 
 ---
@@ -150,9 +148,9 @@ runtime # Time difference of 1.012093 mins
 
 
 `@script`
-Before beginning the task, it would be a good idea to get a rough time estimate.
+Before you start to impute, it would be a good idea to get a rough time estimate.
 
-A simple step for getting a rough runtime estimate would be to run your imputation on a random sample of your data, and calculate the time it takes using the Sys.time() function. You may want to use the sample_n() function from the well known dplyr package sample to your data.
+A simple way to get a feel for the full runtime would be to run your imputation on only a random sample, and calculate the time it takes using the Sys.time() function. You may want to use the sample_n() function from the 'dplyr' package to sample to your data.
 
 In this example, suppose you have decided to create 6 imputed datasets, with 10 iterations each. Within the mice() function, call your sample dataset, and specify m = 6, and maxit = 10. 
 
