@@ -179,7 +179,7 @@ key: "2c56bfa2a8"
 
 
 `@script`
-...but running 30% of the data is around 4 minutes of runtime. So your full imputation task could be considerably longer. Algorithm runtime is generally not a linear function. Utilizing a technique known as 'parallel processing' can make your imputing a LOT more efficient.
+...but running 30% of the data is around 4 minutes of runtime. So your full imputation task could be considerably longer. Algorithmic runtime is generally not a linear function. Utilizing a technique known as 'parallel processing' can make your imputing a LOT more efficient.
 
 
 ---
@@ -244,7 +244,7 @@ parl_time #
 
 
 `@script`
-Next, inn order to leverage this additional computing power, the MICE package has a great wrapper function named "parlMice" which enables you to divide the work across multiple cores. 
+Next, in order to leverage these cores, the MICE package has a great wrapper function named "parlMice" which enables you to divide the work across multiple cores. 
 
 It is considered best practice to use n-1 for the number of cores, since your local machine still needs CPU power to run its other processes. You run the risk of jamming your machine up if you exhaust all available power.  
 
@@ -266,7 +266,7 @@ key: "6cc16b5119"
 
 
 `@script`
-Other options to speed things up would include specifying fewer imputed datasets, fewer iterations, or using less time consuming methods of imputing such as norm rather than predictive mean matching.
+Other approaches to speed things up would include specifying fewer imputed datasets, fewer iterations, or using less time consuming methods of imputing such as norm rather than predictive mean matching.
 
 
 ---
