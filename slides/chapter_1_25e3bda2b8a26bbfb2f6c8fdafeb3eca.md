@@ -17,23 +17,7 @@ title: Data Scientist / Machine Learning Engineer
 
 
 `@script`
-
-
-
----
-## Working With Larger Datasets
-
-```yaml
-type: "FullSlide"
-key: "c191cb6216"
-```
-
-`@part1`
-Intro
-
-
-`@script`
-
+Next, we are going to walk through an example of how to handle time consuming imputation jobs with parallel processing
 
 
 ---
@@ -74,7 +58,7 @@ https://archive.ics.uci.edu/ml/datasets/Statlog+(Shuttle)
 
 
 `@script`
-The example dataset is a rather well known machine learning dataset provided by NASA, and is taken from the "mlbench" package. It represents 9 independent variables of numeric data type, and 1 categorical dependent variable. The data features 58,000 observations, and is not in the realm of what most would consider "big data", but is ideal for demonstrating less than instantaneous imputation runtime.
+The example dataset is a dataset provided by NASA, and is taken from the "mlbench" package. It represents 58,000 observations, 9 numeric independent variables, and 1 categorical dependent variable. While this not in the realm of what most would consider "big data", it is ideal for demonstrating less than instantaneous imputation runtimes.
 
 
 ---
@@ -229,16 +213,18 @@ To get started, first use a function called 'detectCores()' from the 'parallel' 
 
 
 ---
-## Using parlmice()
+## Using parlmice() for Parallel Processing
 
 ```yaml
 type: "TwoRows"
 key: "1c05ef1df9"
-code_zoom: 65
+code_zoom: 60
 ```
 
 `@part1`
-
+Since we need 6 imputed sets, with 10 iterations each, we can divide the work across 3 cores (4 available -1), 2 imputations per core.
+- n.core: # cores to use, n.imp.core: # imputed datasets per core
+- 1.75 minutes for 30%,
 
 
 `@part2`
@@ -259,9 +245,29 @@ parl_time #
 
 
 `@script`
-In order to leverage this additional computing power, the MICE package has a great wrapper function named "parlMice" which enables you to divide the work across multiple cores in parallel. It is considered best practice to use n-1 for the number of cores, since your local machine still needs CPU power to run its other processes. You run the risk of jamming your machine up if you exhaust all available power.  
+In order to leverage this additional computing power, the MICE package has a great wrapper function named "parlMice" which enables you to divide the work across multiple cores. 
 
-Running the previous sample of 30% will only take 33 seconds which is a marked improvement over 1.54 minutes. FYI it takes 5 minutes to do the entire imputation job with 3 cores.
+It is considered best practice to use n-1 for the number of cores, since your local machine still needs CPU power to run its other processes. You run the risk of jamming your machine up if you exhaust all available power.  
+
+Running the previous sample of 30% will only take 1.75 minutes, which is a big improvement.
+
+
+---
+## Other Approaches
+
+```yaml
+type: "FullSlide"
+key: "6cc16b5119"
+```
+
+`@part1`
+- Specify fewer imputed datasets
+- Reduce the number of iterations
+- Select less time consuming method (i.e. "norm" v. "pmm")
+
+
+`@script`
+Other options to speed things up would include specifying fewer datasets, fewer iterations, or using less time consuming methods of imputing such as norm rather than predictive mean matching.
 
 
 ---
@@ -273,5 +279,5 @@ key: "067a2175b2"
 ```
 
 `@script`
-
+Now that you have seen an example of how to approach a time consuming imputation task, lets practice these concepts in the following exercises.
 
