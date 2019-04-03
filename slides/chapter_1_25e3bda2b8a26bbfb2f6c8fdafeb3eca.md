@@ -28,6 +28,7 @@ type: "TwoColumns"
 key: "f4c7d93c70"
 code_zoom: 70
 disable_transition: false
+hide_title: false
 ```
 
 `@part1`
@@ -58,7 +59,7 @@ https://archive.ics.uci.edu/ml/datasets/Statlog+(Shuttle)
 
 
 `@script`
-The example dataset is a dataset provided by NASA, and is taken from the "mlbench" package. It represents 58,000 observations, 9 numeric independent variables, and 1 categorical dependent variable. While this not in the realm of what most would consider "big data", it is ideal for demonstrating less than instantaneous imputation runtimes.
+Our example data is a dataset provided by NASA, and is taken from the "mlbench" package. It represents 58,000 observations, 9 numeric independent variables, and 1 categorical dependent variable. While this not what most would consider "big data", it is ideal for demonstrating less than instantaneous imputation runtimes. We will start by loading our packages, and the Shuttle dataset
 
 
 ---
@@ -89,7 +90,7 @@ paste("Total sparsity is:", sum(sparsity$sparsity))
 
 
 `@script`
-First review each variable's percentage of missing data. As shown previously, a simple check of sparsity can be run using the colSums() and is.na() functions from base R. This shows that we have about 30% total sparsity, and the 'missingness' is spread across all variables
+First, review each variable's percentage of missing data. As shown previously, a simple check of sparsity can be run using the colSums() and is.na() functions from base R. This shows that we have about 30% total sparsity, and the 'missingness' is spread across all variables
 
 
 ---
@@ -107,12 +108,12 @@ key: "717f85ef98"
 2. Degree of 'missingness', 
 3. Number of dimensions (variables)
 4. Type of imputation employed for each variable, 
-5. Number of iterations, and 
+5. Number of iterations
 6. Number of imputed datasets specified
 
 
 `@script`
-While this data is only moderately sized, the time needed to impute the missing data can be considerable, depending on the type of local machine you are working on and available computing power. If this dataset were ten times larger, at 580,000 observations, the complexity would be compounded. The runtime needed not only varies by machine, but also by:
+While this data is only moderately sized, the time needed to impute the missing data can be considerable, depending on the type of local machine you are working on and available computing power. If this dataset were ten times larger, at 580,000 observations, the complexity would be compounded. The runtime needed not only varies by individual machine, but also by:
 
 Degree of missingness, number of dimensions, type of imputation employed for each variable, number of iterations, and the number of imputed datasets that you specify.
 
