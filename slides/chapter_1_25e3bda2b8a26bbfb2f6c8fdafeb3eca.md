@@ -234,7 +234,7 @@ start <- Sys.time()
 shuttle_imp_parl <- parlmice(shuttle_sample, m = 6,
                               n.core = 3, 
                               n.imp.core = 2,
-                              maxit = 10)
+                              maxit = 10) 
 # log completion time 
 end <- Sys.time()
 
