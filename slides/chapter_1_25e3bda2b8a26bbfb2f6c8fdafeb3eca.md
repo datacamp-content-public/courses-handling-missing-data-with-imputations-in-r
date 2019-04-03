@@ -90,7 +90,7 @@ paste("Total sparsity is:", sum(sparsity$sparsity))
 
 
 `@script`
-First, review each variable's percentage of missing data. As shown previously, a simple check of sparsity can be run using the colSums() and is.na() functions from base R. This shows that we have about 30% total sparsity, and the 'missingness' is spread across all variables
+Now briefly review each variable's percentage of missing data. As shown previously, a simple check of sparsity can be run using the colSums() and is.na() functions from base R. This shows that we have about 30% total sparsity, and the 'missingness' is spread across all variables
 
 
 ---
